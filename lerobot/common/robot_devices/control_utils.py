@@ -36,7 +36,7 @@ from lerobot.common.policies.pretrained import PreTrainedPolicy
 from lerobot.common.robot_devices.robots.utils import Robot
 from lerobot.common.robot_devices.utils import busy_wait
 from lerobot.common.utils.utils import get_safe_torch_device, has_method
-
+# TMC: commented out the logging steps 
 
 def log_control_info(robot: Robot, dt_s, episode_index=None, frame_index=None, fps=None):
     log_items = []
@@ -55,31 +55,31 @@ def log_control_info(robot: Robot, dt_s, episode_index=None, frame_index=None, f
         log_items.append(info_str)
 
     # total step time displayed in milliseconds and its frequency
-    log_dt("dt", dt_s)
+    #log_dt("dt", dt_s)
 
     # TODO(aliberts): move robot-specific logs logic in robot.print_logs()
     if not robot.robot_type.startswith("stretch"):
         for name in robot.leader_arms:
             key = f"read_leader_{name}_pos_dt_s"
-            if key in robot.logs:
-                log_dt("dtRlead", robot.logs[key])
+            # if key in robot.logs:
+            #     log_dt("dtRlead", robot.logs[key])
 
         for name in robot.follower_arms:
             key = f"write_follower_{name}_goal_pos_dt_s"
-            if key in robot.logs:
-                log_dt("dtWfoll", robot.logs[key])
+            # if key in robot.logs:
+            #     log_dt("dtWfoll", robot.logs[key])
 
             key = f"read_follower_{name}_pos_dt_s"
-            if key in robot.logs:
-                log_dt("dtRfoll", robot.logs[key])
+            # if key in robot.logs:
+            #     log_dt("dtRfoll", robot.logs[key])
 
         for name in robot.cameras:
             key = f"read_camera_{name}_dt_s"
-            if key in robot.logs:
-                log_dt(f"dtR{name}", robot.logs[key])
+            #if key in robot.logs:
+                #log_dt(f"dtR{name}", robot.logs[key])
 
     info_str = " ".join(log_items)
-    logging.info(info_str)
+    #logging.info(info_str)
 
 
 @cache
